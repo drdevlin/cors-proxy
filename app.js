@@ -3,17 +3,7 @@ const https = require('https');
 const express = require('express');
 const app = express();
 
-function rebuildQuery(queryObject) {
-  const queryObjectEntries = Object.entries(queryObject).filter(entry => entry[0] !== 'url');
-  let queryString = '?';
-  let ranOnce = false;
-  for (const [key, value] of queryObjectEntries) {
-    if (ranOnce) queryString += '&';
-    if (key !== 'url') queryString += `${key}=${value}`;
-    ranOnce = true;
-  }
-  return queryString;
-}
+const rebuildQuery = require('./utils/query.js');
 
 app.get('/', (req, res) => {
   const url = req.query.url;
@@ -30,7 +20,4 @@ app.get('/', (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 4444;
-app.listen(PORT, () => {
-  console.log(`Listening on ${PORT}`);
-});
+module.exports = app;
