@@ -1,5 +1,5 @@
-function rebuildQuery(queryObject) {
-  const queryObjectEntries = Object.entries(queryObject).filter(entry => entry[0] !== 'url');
+const rebuildQuery = (req, res, next) => {
+  const queryObjectEntries = Object.entries(req.query).filter(entry => entry[0] !== 'url');
   let queryString = '?';
   let ranOnce = false;
   for (const [key, value] of queryObjectEntries) {
@@ -7,7 +7,8 @@ function rebuildQuery(queryObject) {
     if (key !== 'url') queryString += `${key}=${value}`;
     ranOnce = true;
   }
-  return queryString;
+  res.queryString = queryString;
+  next();
 }
 
 module.exports = rebuildQuery;
