@@ -3,10 +3,8 @@ const app = express();
 
 const rebuildQuery = require('./middleware/rebuildQuery.js'); 
 const callAPI = require('./middleware/callAPI.js');
+const corsResponse = require('./middleware/corsResponse.js');
 
-app.get('/', rebuildQuery, callAPI, (req, res) => {
-  res.set('Access-Control-Allow-Origin', process.env.WHITELIST);
-  res.send(res.data);
-});
+app.get('/', rebuildQuery, callAPI, corsResponse);
 
 module.exports = app;
