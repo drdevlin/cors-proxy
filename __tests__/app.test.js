@@ -17,10 +17,9 @@ https.get.mockImplementation((string1, callback1) => {
 
 describe('app.js', () => {
   describe('GET /', () => {
-    it('responds 200 with a <url> query', async (done) => {
+    it('responds 200 with a <url> query', async () => {
       const response = await request.get('/?url=something');
       expect(response.status).toBe(200);
-      done();
     });
   });
 });
