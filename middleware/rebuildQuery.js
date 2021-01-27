@@ -7,7 +7,7 @@ const rebuildQuery = (req, res, next) => {
     if (key !== 'url') queryString += `${key}=${value}`;
     ranOnce = true;
   }
-  res.queryString = queryString;
+  res.queryString = encodeURI(queryString);
   next();
 }
 
