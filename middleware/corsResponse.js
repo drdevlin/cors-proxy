@@ -1,5 +1,9 @@
 const corsResponse = (req, res) => {
-  res.set('Access-Control-Allow-Origin', process.env.WHITELIST);
+  const origin = req.headers.origin;
+  if (process.env.WHITELIST.includes(origin)) {
+       res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  res.set('Access-Control-Allow-Origin', origin);
   res.send(res.data);
 }
 
